@@ -1,1 +1,396 @@
-<h1>Йо</h1>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>212 Штурмовой Батальон | Официальный сайт</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Oswald', 'Impact', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            height: 100vh;
+            width: 100%;
+        }
+        .site-container {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        /* ========== ФОНОВОЕ ВИДЕО (ЗАЦИКЛЕНО) ========== */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;   /* Видео покрывает весь экран, сохраняя пропорции */
+            z-index: -2;         /* Отправляем на самый низ */
+            pointer-events: none; /* Чтобы видео не мешало кликам по навигации */
+        }
+
+        /* Полупрозрачная тёмная накладка для улучшения читаемости текста */
+        .overlay-dark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ========== ПАНЕЛЬ НАВИГАЦИИ ========== */
+        .navbar {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(200, 180, 100, 0.3);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.2s ease;
+        }
+
+        .logo-area {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #e6d5a8, #b89a4c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: 0.2s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links li a:hover {
+            color: #e7c158;
+            border-bottom-color: #e7c158;
+        }
+
+        /* ========== ОСНОВНОЙ КОНТЕНТ (ГЛАВНАЯ СТРАНИЦА) ========== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+        }
+
+        .hero-message {
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            padding: 2rem 3rem;
+            border-radius: 32px;
+            border: 1px solid rgba(210, 180, 90, 0.6);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-message h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: linear-gradient(120deg, #fff, #e7b42c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-message p {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #f2e8cf;
+            border-top: 1px solid rgba(255,215,0,0.4);
+            display: inline-block;
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== АДАПТАЦИЯ НА ПЛАНШЕТЫ И ДРУГИЕ УСТРОЙСТВА ========== */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .nav-links {
+                gap: 1.5rem;
+            }
+            .hero-message {
+                padding: 1.2rem 1.8rem;
+            }
+            .hero-message h1 {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            .hero-message p {
+                font-size: 1rem;
+            }
+            .main-content {
+                min-height: calc(100vh - 110px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-message h1 {
+                font-size: 1.8rem;
+            }
+            .nav-links li a {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ========== НИЖНИЙ КОЛОНТИТУЛ ========== */
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #aaa;
+            padding: 1rem;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(2px);
+            letter-spacing: 0.5px;
+            margin-top: auto;
+        }
+
+        .site-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="главная страница.mp4" type="video/mp4">
+        Ваш браузер не поддерживает фоновое видео.
+    </video>
+    <div class="overlay-dark"></div>
+
+    <div class="site-container">
+        <!-- ПАНЕЛЬ НАВИГАЦИИ -->
+        <nav class="navbar">
+            <div class="logo-area">212⚡ШТУРМ</div>
+            <ul class="nav-links">
+                <li><a href="#" id="nav-home">Главная</a></li>
+                <li><a href="#" id="nav-about">О нас</a></li>
+                <li><a href="#" id="nav-contacts">Контакты</a></li>
+            </ul>
+        </nav>
+
+        <!-- ОСНОВНОЙ БЛОК -->
+        <main class="main-content" id="dynamic-content">
+            <div id="hero-container">
+                <div class="hero-message">
+                    <h1>ШТУРМОВОЙ 212 БАТАЛЬОН</h1>
+                    <p>Сила. Честь. Несокрушимость.</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="footer">
+            © 212 Штурмовой батальон
+        </div>
+    </div>
+
+    <script>
+        const homeLink = document.getElementById('nav-home');
+        const aboutLink = document.getElementById('nav-about');
+        const contactsLink = document.getElementById('nav-contacts');
+        const contentContainer = document.getElementById('dynamic-content');
+
+        function renderPage(pageId) {
+            contentContainer.innerHTML = '';
+
+            const fadeDiv = document.createElement('div');
+            fadeDiv.style.animation = 'fadeInUp 0.4s ease-out';
+            
+            if (pageId === 'home') {
+                const heroDiv = document.createElement('div');
+                heroDiv.className = 'hero-message';
+                heroDiv.innerHTML = `
+                    <h1>ШТУРМОВОЙ 212 БАТАЛЬОН</h1>
+                    <p>Сила. Честь. Несокрушимость.</p>
+                `;
+                fadeDiv.appendChild(heroDiv);
+                contentContainer.appendChild(fadeDiv);
+                document.title = "212 Штурмовой батальон | Главная";
+            } 
+            else if (pageId === 'about') {
+                // СТРАНИЦА "О НАС"
+                const aboutDiv = document.createElement('div');
+                aboutDiv.className = 'hero-message';
+                aboutDiv.innerHTML = `
+                    <h1>212-й штурмовой</h1>
+                    <p>Элитное подразделение, выполняющее самые ответственные задачи. <br> 
+                    Боевая подготовка, доблесть и верность присяге — основа нашего братства.</p>
+                    <p style="font-size: 1rem; margin-top: 1rem;">«Там, где другие колеблются, мы идём вперёд»</p>
+                `;
+                fadeDiv.appendChild(aboutDiv);
+                contentContainer.appendChild(fadeDiv);
+                document.title = "212 Штурмовой | О подразделении";
+            } 
+            else if (pageId === 'contacts') {
+                // СТРАНИЦА КОНТАКТЫ
+                const contactsDiv = document.createElement('div');
+                contactsDiv.className = 'hero-message';
+                contactsDiv.innerHTML = `
+                    <h1>Связь с батальоном</h1>
+                    <p>По вопросам: тут чё то<br>
+                    ✉️ Электронная почта: итут@чё.то<br>
+                    <span style="font-size:0.9rem; opacity:0.8;">Надпись поменьше, если надо</span></p>
+                `;
+                fadeDiv.appendChild(contactsDiv);
+                contentContainer.appendChild(fadeDiv);
+                document.title = "212 Штурмовой | Контакты";
+            }
+        }
+
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            renderPage('home');
+            // плавный скролл
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        aboutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            renderPage('about');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        contactsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            renderPage('contacts');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const logo = document.querySelector('.logo-area');
+        if (logo) {
+            logo.style.cursor = 'pointer';
+            logo.addEventListener('click', () => {
+                renderPage('home');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPage('home');
+            const bgVideo = document.querySelector('.video-background');
+            if (bgVideo) {
+                bgVideo.play().catch(err => {
+                    console.log("Автовоспроизведение видео заблокировано, но фон останется тёмным", err);
+                    const tryPlayVideo = () => {
+                        bgVideo.play().then(() => {
+                            document.removeEventListener('click', tryPlayVideo);
+                        }).catch(e => console.log("Видео не запустилось по клику", e));
+                    };
+                    document.addEventListener('click', tryPlayVideo, { once: true });
+                });
+            }
+        });
+
+        const videoElement = document.querySelector('.video-background');
+        if (videoElement) {
+            videoElement.addEventListener('ended', function() {
+                // на случай если loop по какой-то причине не сработал
+                this.currentTime = 0;
+                this.play().catch(e => console.log("рецикл видео", e));
+            });
+        }
+
+        function setActiveNavLink(activeId) {
+            const links = [
+                { id: 'nav-home', page: 'home' },
+                { id: 'nav-about', page: 'about' },
+                { id: 'nav-contacts', page: 'contacts' }
+            ];
+            links.forEach(link => {
+                const element = document.getElementById(link.id);
+                if (element) {
+                    if (link.page === activeId) {
+                        element.style.borderBottom = '2px solid #e7c158';
+                        element.style.color = '#e7c158';
+                    } else {
+                        element.style.borderBottom = '2px solid transparent';
+                        element.style.color = '#f0f0f0';
+                    }
+                }
+            });
+        }
+
+        const originalRender = renderPage;
+        window.renderPage = function(pageId) {
+            originalRender(pageId);
+            setActiveNavLink(pageId);
+        };
+        renderPage = function(pageId) {
+            originalRender(pageId);
+            setActiveNavLink(pageId);
+        };
+
+        const newHomeLink = document.getElementById('nav-home');
+        const newAboutLink = document.getElementById('nav-about');
+        const newContactsLink = document.getElementById('nav-contacts');
+        setTimeout(() => {
+            setActiveNavLink('home');
+        }, 50);
+
+    </script>
+</body>
+</html>

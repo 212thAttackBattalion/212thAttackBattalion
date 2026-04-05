@@ -29,7 +29,6 @@
             z-index: 1;
         }
 
-        /* ========== ФОНОВОЕ ВИДЕО (ЗАЦИКЛЕНО) ========== */
         .video-background {
             position: fixed;
             top: 0;
@@ -52,7 +51,6 @@
             pointer-events: none;
         }
 
-        /* ========== ПАНЕЛЬ НАВИГАЦИИ ========== */
         .navbar {
             background: rgba(10, 10, 10, 0.92);
             backdrop-filter: blur(10px);
@@ -79,7 +77,6 @@
             cursor: pointer;
         }
 
-        /* ОСНОВНОЕ МЕНЮ */
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -107,7 +104,6 @@
             border-bottom-color: #e7c158;
         }
 
-        /* ВЫПАДАЮЩЕЕ ПОДМЕНЮ */
         .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -153,20 +149,18 @@
             padding-left: 1.5rem;
         }
 
-        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             text-align: center;
             padding: 2rem 0;
             gap: 2rem;
             width: 100%;
         }
 
-        /* ГЛАВНЫЙ БЛОК С НАДПИСЬЮ (ТИПА КАРТОЧКА)*/
         .hero-message {
             max-width: 900px;
             width: 90%;
@@ -201,7 +195,6 @@
             padding-top: 0.8rem;
         }
 
-        /* ТЕКСТОВЫЙ БЛОК ПОД ГЛАВНЫМ МЕНЮ */
         .info-text-block {
             width: 100%;
             background: rgba(0, 0, 0, 0.75);
@@ -221,7 +214,6 @@
             padding: 0 24px;
         }
 
-        /* Для совсем узких экранов */
         @media (max-width: 768px) {
             .info-text-block .container {
                 padding: 0 20px;
@@ -256,6 +248,17 @@
             padding-top: 0.6rem;
         }
 
+        /* Дополнительные стили для кастомных блоков */
+        .custom-block {
+            max-width: 900px;
+            width: 90%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 1.5rem;
+            border-radius: 24px;
+            margin: 0 auto;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -267,7 +270,6 @@
             }
         }
 
-        /* ========== АДАПТАЦИЯ ========== */
         @media (max-width: 900px) {
             .navbar {
                 flex-direction: column;
@@ -339,15 +341,12 @@
     <div class="overlay-dark"></div>
 
     <div class="site-container">
-        <!-- НАВИГАЦИЯ С ВЫПАДАЮЩИМИ ПУНКТАМИ -->
         <nav class="navbar">
             <div class="logo-area" id="logoHome">212⚡ДШБ</div>
             <ul class="nav-links">
-                <!-- 1. НОВОБРАНЦАМ (без подменю) -->
                 <li class="nav-item" id="nav-recruit-item">
                     <a href="#" id="nav-recruit">НОВОБРАНЦАМ</a>
                 </li>
-                <!-- 2. БОЙЦАМ (с выпадающем меню) -->
                 <li class="nav-item" id="nav-fighter-item">
                     <a href="#" id="nav-fighter">БОЙЦАМ</a>
                     <ul class="dropdown-menu">
@@ -356,7 +355,6 @@
                         <li><a href="#" class="sub-link" data-page="training_system">Система тренировок</a></li>
                     </ul>
                 </li>
-                <!-- 3. ДОПОЛНИТЕЛЬНО -->
                 <li class="nav-item" id="nav-extra-item">
                     <a href="#" id="nav-extra">ДОПОЛНИТЕЛЬНО</a>
                     <ul class="dropdown-menu">
@@ -365,7 +363,6 @@
                         <li><a href="#" class="sub-link" data-page="documents">Документы батальона</a></li>
                     </ul>
                 </li>
-                <!-- 4. ИНТЕРЕСНОЕ -->
                 <li class="nav-item" id="nav-interest-item">
                     <a href="#" id="nav-interest">ИНТЕРЕСНОЕ</a>
                     <ul class="dropdown-menu">
@@ -376,10 +373,7 @@
             </ul>
         </nav>
 
-        <!-- ОСНОВНОЙ КОНТЕНТ -->
-        <main class="main-content" id="dynamic-content">
-
-        </main>
+        <main class="main-content" id="dynamic-content"></main>
 
         <div class="footer">
             © 212 Штурмовой батальон | Sunrise Of The Respublic
@@ -389,147 +383,377 @@
     <script>
         const contentContainer = document.getElementById('dynamic-content');
         
-        // Основные пункты меню
         const recruitLink = document.getElementById('nav-recruit');
         const fighterMainLink = document.getElementById('nav-fighter');
         const extraMainLink = document.getElementById('nav-extra');
         const interestMainLink = document.getElementById('nav-interest');
         const logo = document.getElementById('logoHome');
 
-        function createFullWidthTextBlock(title, text, note) {
-            const block = document.createElement('div');
-            block.className = 'info-text-block';
+        const pageContent = {
+            // ---------- ГЛАВНАЯ СТРАНИЦА ----------
+            home: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ШТУРМОВОЙ 212 БАТАЛЬОН</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>212th Attack Battalion</h3>
+                                <p>212-й штурмовой батальон был одним из элитных подразделений Республики. Его возглавляли клон маршал коммандер Коуди и генерал Оби-Ван Кеноби. Солдаты 212-ого штурмового батальона отличались наличием оранжевой окраски на их броне.</p>
+                                <div class="small-note">212-й иногда действовал вместе с вторым батальоном. Он входил в Третью системную армию, как часть 7-го воздушного корпуса.</div>
+                            </div>
+                        </div>
+                    `
+                }
+                // ПРИМЕР: ДОБАВИТЬ ВТОРУЮ СЕКЦИЮ
+                // ,
+                // {
+                //     html: `
+                //         <div class="hero-message">
+                //             <h1>Бла</h1>
+                //             <p>Бла бла</p>
+                //         </div>
+                //         <div class="info-text-block">
+                //             <div class="container">
+                //                 <h3>Бла бла бла</h3>
+                //                 <p>Бла бла бла бла</p>
+                //                 <div class="small-note">Бла бла бла бла бла</div>
+                //             </div>
+                //         </div>
+                //     `
+                // }
+            ],
+
+            // ---------- НОВОБРАНЦАМ ----------
+            recruit: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>НОВОБРАНЦАМ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+
+            // ---------- БОЙЦАМ -> УСТАВ ----------
+            fighter_charter: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>УСТАВ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+
+            // ---------- БОЙЦАМ -> СИСТЕМА ПОВЫШЕНИЯ ----------
+            fighter_rank: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>СИСТЕМА ПОВЫШЕНИЯ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+
+            // ---------- БОЙЦАМ -> СИСТЕМА ТРЕНИРОВОК ----------
+            fighter_training: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>СИСТЕМА ТРЕНИРОВОК</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+
+            // ---------- ДОПОЛНИТЕЛЬНО -> ИНСТРУКЦИИ ----------
+            extra_instructions: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ИНСТРУКЦИИ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+
+            // ---------- ДОПОЛНИТЕЛЬНО -> ОТРЯДЫ ----------
+            extra_units: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ОТРЯДЫ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                },
+            ],
+
+            // ---------- ДОПОЛНИТЕЛЬНО -> ДОКУМЕНТЫ ----------
+            extra_documents: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ДОКУМЕНТЫ БАТАЛЬОНА</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+
+            // ---------- ИНТЕРЕСНОЕ -> АЛЬБОМ ----------
+            interest_album: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>АЛЬБОМ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+
+            // ---------- ИНТЕРЕСНОЕ -> ЛОР БАТАЛЬОНА ----------
+            interest_lore: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ЛОР БАТАЛЬОНА</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ]
+        };
+
+        // Общие страницы для категорий
+        const generalPages = {
+            fighter: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>БОЙЦАМ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+            extra: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ДОПОЛНИТЕЛЬНО</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
+            interest: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ИНТЕРЕСНОЕ</h1>
+                            <p>Хз</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3>Хз</h3>
+                                <p>Хз</p>
+                                <div class="small-note">Хз</div>
+                            </div>
+                        </div>
+                    `
+                }
+            ]
+        };
+
+        function renderPageFromSections(sections) {
+            contentContainer.innerHTML = '';
             
-            const innerContainer = document.createElement('div');
-            innerContainer.className = 'container';
-            innerContainer.innerHTML = `
-                <h3>${title}</h3>
-                <p>${text}</p>
-                <div class="small-note">${note}</div>
-            `;
-            block.appendChild(innerContainer);
-            return block;
+            if (!sections || sections.length === 0) {
+                const emptyMessage = document.createElement('div');
+                emptyMessage.className = 'hero-message';
+                emptyMessage.innerHTML = `
+                    <h1>РАЗДЕЛ В РАЗРАБОТКЕ</h1>
+                    <p>Контент скоро появится</p>
+                `;
+                contentContainer.appendChild(emptyMessage);
+                return;
+            }
+            
+            const wrapper = document.createElement('div');
+            wrapper.style.width = '100%';
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = 'column';
+            wrapper.style.alignItems = 'center';
+            wrapper.style.gap = '2rem';
+            
+            sections.forEach((section) => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = section.html.trim();
+                const contentNodes = tempDiv.childNodes;
+                
+                while (tempDiv.firstChild) {
+                    wrapper.appendChild(tempDiv.firstChild);
+                }
+            });
+            
+            contentContainer.appendChild(wrapper);
         }
 
         function renderPage(pageType, subType = null) {
-            contentContainer.innerHTML = '';
+            let sections = null;
+            let pageTitle = "212 Штурмовой";
             
-            let heroTitle = "212 ДЕСАНТНО-ШТУРМОВОЙ БАТАЛЬОН";
-            let heroSub = "Сила. Честь. Несокрушимость.";
-            let infoTitle = "";
-            let infoText = "";
-            let infoNote = "";
-
-            // Логика определения контента
             if (pageType === 'home') {
-                heroTitle = "ШТУРМОВОЙ 212 БАТАЛЬОН";
-                heroSub = "Сила. Честь. Несокрушимость.";
-                infoTitle = "212th Attack Battalion";
-                infoText = "212-й штурмовой батальон был одним из элитных подразделений Республики. Его возглавляли клон маршал коммандер Коуди и генерал Оби-Ван Кеноби. Солдаты 212-ого штурмового батальона отличались наличием оранжевой окраски на их броне.";
-                infoNote = "212-й иногда действовал вместе с вторым батальоном. Он входил в Третью системную армию, как часть 7-го воздушного корпуса. Подразделения во 212-м штурмовом батальоне включали в себя роту «Призрак», 2-ю воздушно-десантную роту и отряд «Парджай».";
-            } 
+                sections = pageContent.home;
+                pageTitle = "212 Штурмовой | Главная";
+            }
             else if (pageType === 'recruit') {
-                heroTitle = "НОВОБРАНЦАМ";
-                heroSub = "Здесь Вы найдете всю нужную информацию для пребывания внутри легиона.";
-                infoTitle = "Основные разделы сайта 212-го Батальона";
-                infoText = "В данном разделе есть самые главные составляющие нашего формирования: Устав, Система повышений, Система Тренировок.
-Устав регулирует положение внутри формирования и определяет основные правила и кодексы.
-Знание устава - необходимо, но заучивать не требуется. Отдельно заострите внимание на Кодах.
-Организационные коды - используются повседневно и постоянно. За незнание кодов выдаются штрафные Санкции в виде дисциплинарных взысканий или устных выговоров.
-В системе повышения вы ознакомитесь с основными критериями для получения очередного воинского звания.
-ОБРАТИТЕ ВНИМАНИЕ! Система повышения состоит из обязательных и дополнительных критериев.
-Система тренировок - шаблоны, которые все бойцы батальона могут использовать для создания своих собственных сценариев тренировок";
-                infoNote = "Организационные коды:
-C-1(Общая боевая готовность) С-2(Общий Сбор в казарме) С-3(Общий Сбор по указанному месту) С-4 (Доложить о своих действия и МП)";
+                sections = pageContent.recruit;
+                pageTitle = "212 Штурмовой | Новобранцам";
             }
             else if (pageType === 'fighter' && subType === 'charter') {
-                heroTitle = "УСТАВ";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.fighter_charter;
+                pageTitle = "212 Штурмовой | Устав";
             }
             else if (pageType === 'fighter' && subType === 'rank_system') {
-                heroTitle = "СИСТЕМА ПОВЫШЕНИЯ";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.fighter_rank;
+                pageTitle = "212 Штурмовой | Система повышения";
             }
             else if (pageType === 'fighter' && subType === 'training_system') {
-                heroTitle = "СИСТЕМА ТРЕНИРОВОК";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.fighter_training;
+                pageTitle = "212 Штурмовой | Система тренировок";
             }
             else if (pageType === 'extra' && subType === 'instructions') {
-                heroTitle = "ИНСТРУКЦИИ";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.extra_instructions;
+                pageTitle = "212 Штурмовой | Инструкции";
             }
             else if (pageType === 'extra' && subType === 'units') {
-                heroTitle = "ОТРЯДЫ";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.extra_units;
+                pageTitle = "212 Штурмовой | Отряды";
             }
             else if (pageType === 'extra' && subType === 'documents') {
-                heroTitle = "ДОКУМЕНТЫ БАТАЛЬОНА";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.extra_documents;
+                pageTitle = "212 Штурмовой | Документы";
             }
             else if (pageType === 'interest' && subType === 'album') {
-                heroTitle = "АЛЬБОМ";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.interest_album;
+                pageTitle = "212 Штурмовой | Альбом";
             }
             else if (pageType === 'interest' && subType === 'lore') {
-                heroTitle = "ЛОР БАТАЛЬОНА";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.interest_lore;
+                pageTitle = "212 Штурмовой | Лор батальона";
+            }
+            else if (pageType === 'fighter' && subType === 'general') {
+                sections = generalPages.fighter;
+                pageTitle = "212 Штурмовой | Бойцам";
+            }
+            else if (pageType === 'extra' && subType === 'general') {
+                sections = generalPages.extra;
+                pageTitle = "212 Штурмовой | Дополнительно";
+            }
+            else if (pageType === 'interest' && subType === 'general') {
+                sections = generalPages.interest;
+                pageTitle = "212 Штурмовой | Интересное";
             }
             else {
-                heroTitle = "ШТУРМОВОЙ 212 БАТАЛЬОН";
-                heroSub = "Снизу надпись";
-                infoTitle = "Типа тема хз";
-                infoText = "Маленькая";
-                infoNote = "Очень маленькая";
+                sections = pageContent.home;
+                pageTitle = "212 Штурмовой | Главная";
             }
-
-            const contentWrapper = document.createElement('div');
-            contentWrapper.style.width = '100%';
-            contentWrapper.style.display = 'flex';
-            contentWrapper.style.flexDirection = 'column';
-            contentWrapper.style.alignItems = 'center';
-            contentWrapper.style.gap = '2rem';
             
-            const heroDiv = document.createElement('div');
-            heroDiv.className = 'hero-message';
-            heroDiv.innerHTML = `
-                <h1>${heroTitle}</h1>
-                <p>${heroSub}</p>
-            `;
-            
-            const textBlock = createFullWidthTextBlock(infoTitle, infoText, infoNote);
-            
-            contentWrapper.appendChild(heroDiv);
-            contentWrapper.appendChild(textBlock);
-            contentContainer.appendChild(contentWrapper);
-            
-            document.title = `212 Штурмовой | ${heroTitle}`;
+            if (sections) {
+                renderPageFromSections(sections);
+            }
+            document.title = pageTitle;
         }
 
-        // Обработка кликов по основным пунктам
         recruitLink.addEventListener('click', (e) => {
             e.preventDefault();
             renderPage('recruit', null);
@@ -581,86 +805,6 @@ C-1(Общая боевая готовность) С-2(Общий Сбор в к
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setActiveNavHighlight('interest');
         });
-        
-        const originalRender = renderPage;
-        window.renderPage = function(pageType, subType) {
-            if (pageType === 'fighter' && subType === 'general') {
-                contentContainer.innerHTML = '';
-                const wrap = document.createElement('div');
-                wrap.style.width = '100%';
-                wrap.style.display = 'flex';
-                wrap.style.flexDirection = 'column';
-                wrap.style.alignItems = 'center';
-                wrap.style.gap = '2rem';
-                
-                const heroGen = document.createElement('div');
-                heroGen.className = 'hero-message';
-                heroGen.innerHTML = `<h1>БОЙЦАМ</h1><p>Надпись ниже</p>`;
-                
-                const textGen = createFullWidthTextBlock(
-                    "Свод правил",
-                    "Раздел для действующих военнослужащих. Выберите интересующий пункт из выпадающего меню: Устав, Система повышения или Система тренировок.",
-                    "Каждый боец обязан знать актуальные редакции документов."
-                );
-                
-                wrap.appendChild(heroGen);
-                wrap.appendChild(textGen);
-                contentContainer.appendChild(wrap);
-                document.title = "212 Штурмовой | Бойцам";
-                return;
-            }
-            if (pageType === 'extra' && subType === 'general') {
-                contentContainer.innerHTML = '';
-                const wrap = document.createElement('div');
-                wrap.style.width = '100%';
-                wrap.style.display = 'flex';
-                wrap.style.flexDirection = 'column';
-                wrap.style.alignItems = 'center';
-                wrap.style.gap = '2rem';
-                
-                const heroGen = document.createElement('div');
-                heroGen.className = 'hero-message';
-                heroGen.innerHTML = `<h1>ДОПОЛНИТЕЛЬНО</h1><p>Надпись ниже</p>`;
-                
-                const textGen = createFullWidthTextBlock(
-                    "Разделы",
-                    "Используйте выпадающее меню 'Дополнительно' для перехода к инструкциям, списку отрядов или документам батальона.",
-                    "Документы батальона строго регламентированы."
-                );
-                
-                wrap.appendChild(heroGen);
-                wrap.appendChild(textGen);
-                contentContainer.appendChild(wrap);
-                document.title = "212 Штурмовой | Дополнительно";
-                return;
-            }
-            if (pageType === 'interest' && subType === 'general') {
-                contentContainer.innerHTML = '';
-                const wrap = document.createElement('div');
-                wrap.style.width = '100%';
-                wrap.style.display = 'flex';
-                wrap.style.flexDirection = 'column';
-                wrap.style.alignItems = 'center';
-                wrap.style.gap = '2rem';
-                
-                const heroGen = document.createElement('div');
-                heroGen.className = 'hero-message';
-                heroGen.innerHTML = `<h1>ИНТЕРЕСНОЕ</h1><p>Надпись ниже</p>`;
-                
-                const textGen = createFullWidthTextBlock(
-                    "Погружение",
-                    "Выберите 'Альбом' для просмотра фотохроники или 'Лор батальона' для изучения истории подразделения.",
-                    "Гордость батальона — наши ветераны."
-                );
-                
-                wrap.appendChild(heroGen);
-                wrap.appendChild(textGen);
-                contentContainer.appendChild(wrap);
-                document.title = "212 Штурмовой | Интересное";
-                return;
-            }
-            originalRender(pageType, subType);
-        };
         
         function setActiveNavHighlight(activeCategory) {
             const allMainLinks = [

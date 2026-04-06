@@ -20,6 +20,14 @@
             width: 100%;
         }
 
+        body.home-page .main-content {
+            justify-content: center;
+        }
+
+        body.home-page #dynamic-content > div:first-child {
+            margin-top: 12vh;
+        }
+
         .site-container {
             position: relative;
             min-height: 100vh;
@@ -248,7 +256,6 @@
             padding-top: 0.6rem;
         }
 
-        /* Дополнительные стили для кастомных блоков */
         .custom-block {
             max-width: 900px;
             width: 90%;
@@ -306,6 +313,9 @@
             .info-text-block h3 {
                 font-size: 1.3rem;
             }
+            body.home-page #dynamic-content > div:first-child {
+                margin-top: 6vh;
+            }
         }
 
         @media (max-width: 550px) {
@@ -318,6 +328,9 @@
             }
             .info-text-block {
                 padding: 1.2rem 0;
+            }
+            body.home-page #dynamic-content > div:first-child {
+                margin-top: 4vh;
             }
         }
 
@@ -712,6 +725,12 @@
         function renderPage(pageType, subType = null) {
             let sections = null;
             let pageTitle = "212 Штурмовой";
+            
+            if (pageType === 'home') {
+                document.body.classList.add('home-page');
+            } else {
+                document.body.classList.remove('home-page');
+            }
             
             if (pageType === 'home') {
                 sections = pageContent.home;

@@ -41,7 +41,7 @@ function renderPageFromSections(sections) {
 
 function renderPage(pageType, subType = null) {
     let sections = null;
-    let pageTitle = "212 Штурмовой";
+    let pageTitle = "212 Десантно-Штурмовой";
     
     if (pageType === 'home') {
         document.body.classList.add('home-page');
@@ -51,59 +51,59 @@ function renderPage(pageType, subType = null) {
     
     if (pageType === 'home') {
         sections = pageContent.home;
-        pageTitle = "212 Штурмовой | Главная";
+        pageTitle = "212 Десантно-Штурмовой | Главная";
     }
     else if (pageType === 'recruit') {
         sections = pageContent.recruit;
-        pageTitle = "212 Штурмовой | Новобранцам";
+        pageTitle = "212 Десантно-Штурмовой | Новобранцам";
     }
     else if (pageType === 'fighter' && subType === 'charter') {
         sections = pageContent.fighter_charter;
-        pageTitle = "212 Штурмовой | Устав";
+        pageTitle = "212 Десантно-Штурмовой | Устав";
     }
     else if (pageType === 'fighter' && subType === 'rank_system') {
         sections = pageContent.fighter_rank;
-        pageTitle = "212 Штурмовой | Система повышения";
+        pageTitle = "212 Десантно-Штурмовой | Система повышения";
     }
     else if (pageType === 'fighter' && subType === 'training_system') {
         sections = pageContent.fighter_training;
-        pageTitle = "212 Штурмовой | Система тренировок";
+        pageTitle = "212 Десантно-Штурмовой | Система тренировок";
     }
     else if (pageType === 'extra' && subType === 'instructions') {
         sections = pageContent.extra_instructions;
-        pageTitle = "212 Штурмовой | Инструкции";
+        pageTitle = "212 Десантно-Штурмовой | Инструкции";
     }
     else if (pageType === 'extra' && subType === 'units') {
         sections = pageContent.extra_units;
-        pageTitle = "212 Штурмовой | Отряды";
+        pageTitle = "212 Десантно-Штурмовой | Отряды";
     }
     else if (pageType === 'extra' && subType === 'documents') {
         sections = pageContent.extra_documents;
-        pageTitle = "212 Штурмовой | Документы";
+        pageTitle = "212 Десантно-Штурмовой | Документы";
     }
     else if (pageType === 'interest' && subType === 'album') {
         sections = pageContent.interest_album;
-        pageTitle = "212 Штурмовой | Альбом";
+        pageTitle = "212 Десантно-Штурмовой | Альбом";
     }
     else if (pageType === 'interest' && subType === 'lore') {
         sections = pageContent.interest_lore;
-        pageTitle = "212 Штурмовой | Лор батальона";
+        pageTitle = "212 Десантно-Штурмовой | Лор батальона";
     }
     else if (pageType === 'fighter' && subType === 'general') {
         sections = generalPages.fighter;
-        pageTitle = "212 Штурмовой | Бойцам";
+        pageTitle = "212 Десантно-Штурмовой | Бойцам";
     }
     else if (pageType === 'extra' && subType === 'general') {
         sections = generalPages.extra;
-        pageTitle = "212 Штурмовой | Дополнительно";
+        pageTitle = "212 Десантно-Штурмовой | Дополнительно";
     }
     else if (pageType === 'interest' && subType === 'general') {
         sections = generalPages.interest;
-        pageTitle = "212 Штурмовой | Интересное";
+        pageTitle = "212 Десантно-Штурмовой | Интересное";
     }
     else {
         sections = pageContent.home;
-        pageTitle = "212 Штурмовой | Главная";
+        pageTitle = "212 Десантно-Штурмовой | Главная";
     }
     
     if (sections) {

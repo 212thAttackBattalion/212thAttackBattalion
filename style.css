@@ -337,6 +337,22 @@ body.home-page #dynamic-content > div:first-child {
     margin-top: auto;
 }
 
+// жирный текст
 b {
     font-size: 1.3em;
+}
+
+// скролл бар
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+    background: #e7c158;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ff8c00;
 }

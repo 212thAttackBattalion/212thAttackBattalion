@@ -102,7 +102,7 @@ function renderPage(pageType, subType = null) {
     }
     else if (pageType === 'extra' && subType === 'instructions') {
         sections = pageContent.extra_instructions;
-        pageTitle = "212 Десантно-Штурмовой | Инструкции";
+        pageTitle = "212 Штурмовой | Инструкции";
     }
     else if (pageType === 'extra' && subType === 'units') {
         sections = pageContent.extra_units;
@@ -144,7 +144,6 @@ function renderPage(pageType, subType = null) {
     document.title = pageTitle;
 }
 
-// Обработчики с сохранением состояния
 recruitLink.addEventListener('click', (e) => {
     e.preventDefault();
     renderPage('recruit', null);
@@ -181,26 +180,14 @@ function submenuHandler(e) {
 
 fighterMainLink.addEventListener('click', (e) => {
     e.preventDefault();
-    renderPage('fighter', 'general');
-    saveCurrentPage('fighter', 'general');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setActiveNavHighlight('fighter');
 });
 
 extraMainLink.addEventListener('click', (e) => {
     e.preventDefault();
-    renderPage('extra', 'general');
-    saveCurrentPage('extra', 'general');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setActiveNavHighlight('extra');
 });
 
 interestMainLink.addEventListener('click', (e) => {
     e.preventDefault();
-    renderPage('interest', 'general');
-    saveCurrentPage('interest', 'general');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setActiveNavHighlight('interest');
 });
 
 function setActiveNavHighlight(activeCategory) {

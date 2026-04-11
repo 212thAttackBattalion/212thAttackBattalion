@@ -668,14 +668,38 @@ body {
     }
 }
 
-/* жирный текст */
+/* Обычный жирный текст */
 b {
-    font-size: 1.3em;
+    font-size: 1em;
     color: #e7c158;
     transition: all 0.3s ease;
 }
 
 b:hover {
+    text-shadow: 0 0 8px rgba(231, 193, 88, 0.5);
+}
+
+/* Увеличенный текст */
+.big-text {
+    font-size: 1.3em;
+    font-weight: normal;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.big-text:hover {
+    text-shadow: 0 0 8px rgba(231, 193, 88, 0.5);
+}
+
+/* Жирный увеличенный текст */
+.big-text-bold {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #e7c158;
+    transition: all 0.3s ease;
+}
+
+.big-text-bold:hover {
     text-shadow: 0 0 8px rgba(231, 193, 88, 0.5);
 }
 

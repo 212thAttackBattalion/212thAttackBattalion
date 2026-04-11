@@ -6,6 +6,8 @@ const extraMainLink = document.getElementById('nav-extra');
 const interestMainLink = document.getElementById('nav-interest');
 const logo = document.getElementById('logoHome');
 
+contentContainer.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+
 // Сохранение текущей страницы в localStorage
 function saveCurrentPage(pageType, subType) {
     const state = { pageType, subType };
@@ -29,36 +31,46 @@ function loadSavedPage() {
 }
 
 function renderPageFromSections(sections) {
-    contentContainer.innerHTML = '';
+    contentContainer.style.opacity = '0';
+    contentContainer.style.transform = 'translateY(10px)';
     
-    if (!sections || sections.length === 0) {
-        const emptyMessage = document.createElement('div');
-        emptyMessage.className = 'hero-message';
-        emptyMessage.innerHTML = `
-            <h1>РАЗДЕЛ В РАЗРАБОТКЕ</h1>
-            <p>Контент скоро появится</p>
-        `;
-        contentContainer.appendChild(emptyMessage);
-        return;
-    }
-    
-    const wrapper = document.createElement('div');
-    wrapper.style.width = '100%';
-    wrapper.style.display = 'flex';
-    wrapper.style.flexDirection = 'column';
-    wrapper.style.alignItems = 'center';
-    wrapper.style.gap = '2rem';
-    
-    sections.forEach((section) => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = section.html.trim();
+    setTimeout(() => {
+        contentContainer.innerHTML = '';
         
-        while (tempDiv.firstChild) {
-            wrapper.appendChild(tempDiv.firstChild);
+        if (!sections || sections.length === 0) {
+            const emptyMessage = document.createElement('div');
+            emptyMessage.className = 'hero-message';
+            emptyMessage.innerHTML = `
+                <h1>РАЗДЕЛ В РАЗРАБОТКЕ</h1>
+                <p>Контент скоро появится</p>
+            `;
+            contentContainer.appendChild(emptyMessage);
+        } else {
+            const wrapper = document.createElement('div');
+            wrapper.style.width = '100%';
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = 'column';
+            wrapper.style.alignItems = 'center';
+            wrapper.style.gap = '2rem';
+            
+            sections.forEach((section) => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = section.html.trim();
+                
+                while (tempDiv.firstChild) {
+                    wrapper.appendChild(tempDiv.firstChild);
+                }
+            });
+            
+            contentContainer.appendChild(wrapper);
         }
-    });
-    
-    contentContainer.appendChild(wrapper);
+        
+        setTimeout(() => {
+            contentContainer.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            contentContainer.style.opacity = '1';
+            contentContainer.style.transform = 'translateY(0)';
+        }, 50);
+    }, 150);
 }
 
 function renderPage(pageType, subType = null) {

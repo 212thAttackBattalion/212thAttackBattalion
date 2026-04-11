@@ -337,12 +337,12 @@ body.home-page #dynamic-content > div:first-child {
     margin-top: auto;
 }
 
-// жирный текст
+/* жирный текст */
 b {
     font-size: 1.3em;
 }
 
-// скролл бар
+/* скролл бар */
 ::-webkit-scrollbar {
     width: 8px;
 }

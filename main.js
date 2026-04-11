@@ -102,7 +102,7 @@ function renderPage(pageType, subType = null) {
     }
     else if (pageType === 'extra' && subType === 'instructions') {
         sections = pageContent.extra_instructions;
-        pageTitle = "212 Штурмовой | Инструкции";
+        pageTitle = "212 Десантно-Штурмовой | Инструкции";
     }
     else if (pageType === 'extra' && subType === 'units') {
         sections = pageContent.extra_units;

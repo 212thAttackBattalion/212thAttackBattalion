@@ -6,6 +6,28 @@ const extraMainLink = document.getElementById('nav-extra');
 const interestMainLink = document.getElementById('nav-interest');
 const logo = document.getElementById('logoHome');
 
+// Сохранение текущей страницы в localStorage
+function saveCurrentPage(pageType, subType) {
+    const state = { pageType, subType };
+    localStorage.setItem('currentPage', JSON.stringify(state));
+}
+
+// Загрузка сохранённой страницы
+function loadSavedPage() {
+    const saved = localStorage.getItem('currentPage');
+    if (saved) {
+        try {
+            const { pageType, subType } = JSON.parse(saved);
+            renderPage(pageType, subType);
+            setActiveNavHighlight(pageType === 'home' ? null : pageType);
+            return true;
+        } catch(e) {
+            console.log('Ошибка загрузки сохранения');
+        }
+    }
+    return false;
+}
+
 function renderPageFromSections(sections) {
     contentContainer.innerHTML = '';
     
@@ -43,13 +65,10 @@ function renderPage(pageType, subType = null) {
     let sections = null;
     let pageTitle = "212 Десантно-Штурмовой";
     
-    if (pageType === 'home') {
-        document.body.classList.add('home-page');
-    } else {
-        document.body.classList.remove('home-page');
-    }
+    document.body.classList.remove('home-page');
     
     if (pageType === 'home') {
+        document.body.classList.add('home-page');
         sections = pageContent.home;
         pageTitle = "212 Десантно-Штурмовой | Главная";
     }
@@ -102,6 +121,7 @@ function renderPage(pageType, subType = null) {
         pageTitle = "212 Десантно-Штурмовой | Интересное";
     }
     else {
+        document.body.classList.add('home-page');
         sections = pageContent.home;
         pageTitle = "212 Десантно-Штурмовой | Главная";
     }
@@ -112,9 +132,11 @@ function renderPage(pageType, subType = null) {
     document.title = pageTitle;
 }
 
+// Обработчики с сохранением состояния
 recruitLink.addEventListener('click', (e) => {
     e.preventDefault();
     renderPage('recruit', null);
+    saveCurrentPage('recruit', null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveNavHighlight('recruit');
 });
@@ -136,8 +158,10 @@ function submenuHandler(e) {
     
     if (parentCategory && page) {
         renderPage(parentCategory, page);
+        saveCurrentPage(parentCategory, page);
     } else {
-        renderPage('home');
+        renderPage('home', null);
+        saveCurrentPage('home', null);
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveNavHighlight(parentCategory);
@@ -146,6 +170,7 @@ function submenuHandler(e) {
 fighterMainLink.addEventListener('click', (e) => {
     e.preventDefault();
     renderPage('fighter', 'general');
+    saveCurrentPage('fighter', 'general');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveNavHighlight('fighter');
 });
@@ -153,6 +178,7 @@ fighterMainLink.addEventListener('click', (e) => {
 extraMainLink.addEventListener('click', (e) => {
     e.preventDefault();
     renderPage('extra', 'general');
+    saveCurrentPage('extra', 'general');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveNavHighlight('extra');
 });
@@ -160,6 +186,7 @@ extraMainLink.addEventListener('click', (e) => {
 interestMainLink.addEventListener('click', (e) => {
     e.preventDefault();
     renderPage('interest', 'general');
+    saveCurrentPage('interest', 'general');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveNavHighlight('interest');
 });
@@ -187,6 +214,7 @@ function setActiveNavHighlight(activeCategory) {
 
 logo.addEventListener('click', () => {
     renderPage('home', null);
+    saveCurrentPage('home', null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setActiveNavHighlight(null);
     document.querySelectorAll('.nav-links a').forEach(a => {
@@ -210,8 +238,18 @@ function initMobileDropdowns() {
     });
 }
 
+window.clearSavedPage = function() {
+    localStorage.removeItem('currentPage');
+    console.log('Сохранение очищено');
+    location.reload();
+};
+
 window.addEventListener('DOMContentLoaded', () => {
-    renderPage('home', null);
+    const loaded = loadSavedPage();
+    if (!loaded) {
+        renderPage('home', null);
+        setActiveNavHighlight(null);
+    }
     attachSubmenuHandlers();
     initMobileDropdowns();
     const bgVideo = document.querySelector('.video-background');

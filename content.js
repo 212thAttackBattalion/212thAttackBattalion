@@ -293,12 +293,12 @@ const pageContent = {
                     html: `
                         <div class="hero-message">
                             <h1>ДОКУМЕНТЫ БАТАЛЬОНА</h1>
-                            <p>В разработке</p>
+                            <p>Полезные документы для 212</p>
                         </div>
                         <div class="info-text-block">
                             <div class="container">
                                 <h3>В разработке</h3>
-                                <p>В разработке</p>
+                                <p> </p>
                                 <div class="small-note"> </div>
                             </div>
                         </div>

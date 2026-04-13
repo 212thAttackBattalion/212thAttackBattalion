@@ -737,3 +737,47 @@ b:hover {
         transform: translateY(0);
     }
 }
+
+/* Блок с картинкой слева */
+.content-with-image {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.content-image {
+    width: 500px;
+    height: auto;
+    border-radius: 12px;
+    border: 2px solid rgba(210, 180, 90, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(231, 193, 88, 0.2);
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.content-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(231, 193, 88, 0.3);
+    border-color: rgba(231, 193, 88, 0.8);
+}
+
+.content-text {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .content-with-image {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .content-image {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}

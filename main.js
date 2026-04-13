@@ -128,6 +128,10 @@ function renderPage(pageType, subType = null) {
         sections = generalPages.extra;
         pageTitle = "212 Десантно-Штурмовой | Дополнительно";
     }
+    else if (pageType === 'interest' && subType === 'lorekeepers') {
+        sections = pageContent.interest_lorekeepers;
+        pageTitle = "212 Десантно-Штурмовой | Лорники";
+    }
     else if (pageType === 'interest' && subType === 'general') {
         sections = generalPages.interest;
         pageTitle = "212 Десантно-Штурмовой | Интересное";
@@ -137,6 +141,7 @@ function renderPage(pageType, subType = null) {
         sections = pageContent.home;
         pageTitle = "212 Десантно-Штурмовой | Главная";
     }
+    
     
     if (sections) {
         renderPageFromSections(sections);

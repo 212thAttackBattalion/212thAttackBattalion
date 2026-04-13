@@ -365,7 +365,47 @@ const pageContent = {
                         </div>
                     `
                 }
-            ]
+            ],
+            // ---------- ИНТЕРЕСНОЕ -> ЛОРНИКИ ----------
+            interest_lorekeepers: [
+                {
+                    html: `
+                        <div class="hero-message">
+                            <h1>ЛОРНИКИ</h1>
+                            <p>Хранители истории 212-го батальона</p>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3></h3>
+                                <p></p>
+                            <div class="small-note"></div>
+                            </div>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3></h3>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <div class="small-note"></div>
+                            </div>
+                        </div>
+                        <div class="info-text-block">
+                            <div class="container">
+                                <h3></h3>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <p></p>
+                                <div class="small-note"></div>
+                            </div>
+                        </div>
+                    `
+                }
+            ],
         };
 
         // Общие страницы для категорий

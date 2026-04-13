@@ -376,9 +376,14 @@ const pageContent = {
                         </div>
                         <div class="info-text-block">
                             <div class="container">
-                                <h3></h3>
-                                <p></p>
-                            <div class="small-note"></div>
+                                <div class="content-with-image">
+                                    <img src="img/commanderCody.png" alt="Коммандир Коди" class="content-image">
+                                    <div class="content-text">
+                                        <h3></h3>
+                                        <p></p>
+                                        <div class="small-note"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="info-text-block">
